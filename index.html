@@ -35,6 +35,7 @@
             color: var(--light);
             direction: rtl;
             overflow-x: hidden;
+            height: 100vh;
         }
 
         .hidden {
@@ -51,6 +52,7 @@
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
             position: relative;
             z-index: 100;
+            height: 70px;
         }
 
         .logo {
@@ -118,6 +120,19 @@
             gap: 0.8rem;
         }
 
+        /* المحتوى الرئيسي */
+        .app-container {
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+        }
+
+        .main-content {
+            display: flex;
+            flex: 1;
+            overflow: hidden;
+        }
+
         /* تصميم جديد للقائمة الجانبية */
         .sidebar {
             width: 280px;
@@ -182,6 +197,10 @@
             background: rgba(0, 0, 0, 0.2);
         }
 
+        .online-users {
+            margin-bottom: 1rem;
+        }
+
         .online-users h4 {
             margin-bottom: 0.8rem;
             display: flex;
@@ -194,6 +213,8 @@
             display: flex;
             flex-direction: column;
             gap: 0.6rem;
+            max-height: 200px;
+            overflow-y: auto;
         }
 
         .user-item {
@@ -560,6 +581,53 @@
             border-top: 1px solid rgba(255, 255, 255, 0.1);
         }
 
+        /* صفحة الإعدادات */
+        .settings-page {
+            flex: 1;
+            padding: 2rem;
+            overflow-y: auto;
+            background: var(--dark);
+        }
+
+        .settings-section {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            max-width: 800px;
+            margin: 0 auto 1.5rem;
+        }
+
+        .settings-section h3 {
+            margin-bottom: 1.2rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--secondary);
+        }
+
+        .settings-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.8rem 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .settings-item:last-child {
+            border-bottom: none;
+        }
+
+        .settings-item-label {
+            font-size: 0.95rem;
+        }
+
+        .settings-item-desc {
+            font-size: 0.8rem;
+            color: rgba(255, 255, 255, 0.6);
+            margin-top: 0.3rem;
+        }
+
         /* تصميم جديد للأزرار */
         .btn {
             padding: 0.6rem 1.2rem;
@@ -735,48 +803,7 @@
             gap: 0.8rem;
         }
 
-        /* صفحة الإعدادات */
-        .settings-page {
-            padding: 2rem;
-        }
-
-        .settings-section {
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 12px;
-            padding: 1.5rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .settings-section h3 {
-            margin-bottom: 1.2rem;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            color: var(--secondary);
-        }
-
-        .settings-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 0.8rem 0;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-        }
-
-        .settings-item:last-child {
-            border-bottom: none;
-        }
-
-        .settings-item-label {
-            font-size: 0.95rem;
-        }
-
-        .settings-item-desc {
-            font-size: 0.8rem;
-            color: rgba(255, 255, 255, 0.6);
-            margin-top: 0.3rem;
-        }
-
+        /* التبديل */
         .switch {
             position: relative;
             display: inline-block;
@@ -1029,21 +1056,21 @@
                             <div class="settings-item-label">تحديث الصورة الشخصية</div>
                             <div class="settings-item-desc">غير صورتك لجعل حسابك مميزاً</div>
                         </div>
-                        <button class="btn btn-small">تغيير</button>
+                        <button class="btn btn-small" id="changeAvatarBtn">تغيير</button>
                     </div>
                     <div class="settings-item">
                         <div>
                             <div class="settings-item-label">تغيير اسم المستخدم</div>
                             <div class="settings-item-desc">اختر اسماً يميزك في المجتمع</div>
                         </div>
-                        <button class="btn btn-small">تغيير</button>
+                        <button class="btn btn-small" id="changeUsernameBtn">تغيير</button>
                     </div>
                     <div class="settings-item">
                         <div>
                             <div class="settings-item-label">تغيير كلمة المرور</div>
                             <div class="settings-item-desc">حافظ على أمان حسابك</div>
                         </div>
-                        <button class="btn btn-small">تغيير</button>
+                        <button class="btn btn-small" id="changePasswordBtn">تغيير</button>
                     </div>
                 </div>
 
@@ -1055,7 +1082,7 @@
                             <div class="settings-item-desc">تلقي إشعارات عند وصول رسائل جديدة</div>
                         </div>
                         <label class="switch">
-                            <input type="checkbox" checked>
+                            <input type="checkbox" id="messageNotifications" checked>
                             <span class="slider"></span>
                         </label>
                     </div>
@@ -1065,7 +1092,7 @@
                             <div class="settings-item-desc">إشعارات عندما يبدأ أصدقاؤك بثاً مباشراً</div>
                         </div>
                         <label class="switch">
-                            <input type="checkbox" checked>
+                            <input type="checkbox" id="streamNotifications" checked>
                             <span class="slider"></span>
                         </label>
                     </div>
@@ -1075,7 +1102,7 @@
                             <div class="settings-item-desc">إشعارات حول البطولات القادمة</div>
                         </div>
                         <label class="switch">
-                            <input type="checkbox">
+                            <input type="checkbox" id="tournamentNotifications">
                             <span class="slider"></span>
                         </label>
                     </div>
@@ -1089,7 +1116,7 @@
                             <div class="settings-item-desc">الموافقة على طلبات المتابعة قبل قبولها</div>
                         </div>
                         <label class="switch">
-                            <input type="checkbox">
+                            <input type="checkbox" id="privateAccount">
                             <span class="slider"></span>
                         </label>
                     </div>
@@ -1099,7 +1126,7 @@
                             <div class="settings-item-desc">إخفاء ما إذا كنت متصلاً أم لا</div>
                         </div>
                         <label class="switch">
-                            <input type="checkbox">
+                            <input type="checkbox" id="hideOnlineStatus">
                             <span class="slider"></span>
                         </label>
                     </div>
@@ -1109,7 +1136,7 @@
                             <div class="settings-item-desc">السماح فقط للأصدقاء بإرسال رسائل مباشرة</div>
                         </div>
                         <label class="switch">
-                            <input type="checkbox" checked>
+                            <input type="checkbox" id="blockDMs" checked>
                             <span class="slider"></span>
                         </label>
                     </div>
@@ -1279,6 +1306,32 @@
         </div>
     </div>
 
+    <!-- نموذج تغيير الصورة الشخصية -->
+    <div class="modal hidden" id="avatarModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>تغيير الصورة الشخصية</h2>
+                <button class="close-btn">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label>اختر صورة جديدة</label>
+                    <input type="file" id="avatarInput" class="form-control" accept="image/*">
+                </div>
+                <div class="form-group">
+                    <label>معاينة الصورة</label>
+                    <div id="avatarPreview" style="width: 150px; height: 150px; border-radius: 50%; background: rgba(255,255,255,0.1); margin: 0 auto; overflow: hidden;">
+                        <img id="avatarPreviewImg" style="width: 100%; height: 100%; object-fit: cover;">
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-outline" id="cancelAvatarBtn">إلغاء</button>
+                <button class="btn btn-primary" id="saveAvatarBtn">حفظ التغييرات</button>
+            </div>
+        </div>
+    </div>
+
     <!-- Firebase SDK -->
     <script src="https://www.gstatic.com/firebasejs/10.1.0/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.1.0/firebase-auth-compat.js"></script>
@@ -1307,7 +1360,6 @@
         let currentPage = "home";
         let stream = null;
         let screenStream = null;
-        let peerConnections = {};
         let audioRecorder = null;
         let audioChunks = [];
         let audioBlob = null;
@@ -1379,6 +1431,20 @@
         const cancelAudioBtn = document.getElementById("cancelAudioBtn");
         const audioTimer = document.getElementById("audioTimer");
         const audioVisualizer = document.getElementById("audioVisualizer");
+        const changeAvatarBtn = document.getElementById("changeAvatarBtn");
+        const changeUsernameBtn = document.getElementById("changeUsernameBtn");
+        const changePasswordBtn = document.getElementById("changePasswordBtn");
+        const avatarModal = document.getElementById("avatarModal");
+        const avatarInput = document.getElementById("avatarInput");
+        const avatarPreviewImg = document.getElementById("avatarPreviewImg");
+        const saveAvatarBtn = document.getElementById("saveAvatarBtn");
+        const cancelAvatarBtn = document.getElementById("cancelAvatarBtn");
+        const messageNotifications = document.getElementById("messageNotifications");
+        const streamNotifications = document.getElementById("streamNotifications");
+        const tournamentNotifications = document.getElementById("tournamentNotifications");
+        const privateAccount = document.getElementById("privateAccount");
+        const hideOnlineStatus = document.getElementById("hideOnlineStatus");
+        const blockDMs = document.getElementById("blockDMs");
 
         // استمع لتغير حالة المصادقة
         auth.onAuthStateChanged(user => {
@@ -1389,6 +1455,7 @@
                 loadChannels();
                 loadMessages(currentChannel);
                 loadOnlineUsers();
+                loadUserSettings(user.uid);
             } else {
                 currentUser = null;
                 updateUIForLoggedOutUser();
@@ -1402,11 +1469,14 @@
                 ? `<img src="${user.photoURL}" alt="صورة المستخدم">`
                 : `<span>${user.displayName ? user.displayName.charAt(0) : user.email.charAt(0)}</span>`;
             userAvatar.style.backgroundColor = user.photoURL ? 'transparent' : stringToColor(user.uid);
-            userAvatar.classList.add("user-avatar-loggedin");
             
-            // تحميل صورة المستخدم إذا كانت موجودة
-            if (user.photoURL) {
-                userAvatar.innerHTML = `<img src="${user.photoURL}" alt="صورة المستخدم">`;
+            // تحديث معلومات البث إذا كان المستخدم يبث
+            if (stream || screenStream) {
+                streamerName.textContent = user.displayName || user.email.split("@")[0];
+                if (user.photoURL) {
+                    streamerAvatar.src = user.photoURL;
+                }
+                streamInfo.classList.remove("hidden");
             }
         }
 
@@ -1414,7 +1484,7 @@
         function updateUIForLoggedOutUser() {
             document.querySelector(".auth-buttons").classList.remove("hidden");
             userAvatar.innerHTML = '<i class="fas fa-user"></i>';
-            userAvatar.classList.remove("user-avatar-loggedin");
+            userAvatar.style.backgroundColor = '';
             messagesContainer.innerHTML = "";
             channelList.innerHTML = "";
             onlineUsers.innerHTML = "";
@@ -1445,6 +1515,59 @@
                     });
                 });
             });
+        }
+
+        // تحميل إعدادات المستخدم
+        function loadUserSettings(userId) {
+            database.ref(`userSettings/${userId}`).once("value").then(snapshot => {
+                const settings = snapshot.val() || {};
+                
+                if (settings.messageNotifications !== undefined) {
+                    messageNotifications.checked = settings.messageNotifications;
+                }
+                
+                if (settings.streamNotifications !== undefined) {
+                    streamNotifications.checked = settings.streamNotifications;
+                }
+                
+                if (settings.tournamentNotifications !== undefined) {
+                    tournamentNotifications.checked = settings.tournamentNotifications;
+                }
+                
+                if (settings.privateAccount !== undefined) {
+                    privateAccount.checked = settings.privateAccount;
+                }
+                
+                if (settings.hideOnlineStatus !== undefined) {
+                    hideOnlineStatus.checked = settings.hideOnlineStatus;
+                }
+                
+                if (settings.blockDMs !== undefined) {
+                    blockDMs.checked = settings.blockDMs;
+                }
+            });
+        }
+
+        // حفظ إعدادات المستخدم
+        function saveUserSettings() {
+            if (!currentUser) return;
+            
+            const settings = {
+                messageNotifications: messageNotifications.checked,
+                streamNotifications: streamNotifications.checked,
+                tournamentNotifications: tournamentNotifications.checked,
+                privateAccount: privateAccount.checked,
+                hideOnlineStatus: hideOnlineStatus.checked,
+                blockDMs: blockDMs.checked
+            };
+            
+            database.ref(`userSettings/${currentUser.uid}`).set(settings)
+                .then(() => {
+                    alert("تم حفظ الإعدادات بنجاح");
+                })
+                .catch(error => {
+                    console.error("Error saving settings:", error);
+                });
         }
 
         // تحميل القنوات
@@ -1755,12 +1878,17 @@
                     viewers: 0
                 });
                 
+                // تحديث معلومات البث
+                streamerName.textContent = currentUser.displayName || currentUser.email.split("@")[0];
+                if (currentUser.photoURL) {
+                    streamerAvatar.src = currentUser.photoURL;
+                }
+                streamInfo.classList.remove("hidden");
+                
                 // تحديث عدد المشاهدين
                 database.ref(`streams/${currentUser.uid}/viewers`).on("value", snapshot => {
                     viewersCount.textContent = snapshot.val() || 0;
                 });
-                
-                setupWebRTC();
                 
             } catch (error) {
                 console.error("Error starting stream:", error);
@@ -1779,9 +1907,6 @@
                 document.querySelector(".chat-area").classList.remove("hidden");
                 
                 database.ref(`streams/${currentUser.uid}`).remove();
-                
-                Object.values(peerConnections).forEach(pc => pc.close());
-                peerConnections = {};
             }
         }
 
@@ -1796,6 +1921,13 @@
                 document.querySelector(".chat-area").classList.add("hidden");
                 streamArea.classList.remove("hidden");
                 streamVideo.srcObject = screenStream;
+                
+                // تحديث معلومات البث
+                streamerName.textContent = currentUser.displayName || currentUser.email.split("@")[0];
+                if (currentUser.photoURL) {
+                    streamerAvatar.src = currentUser.photoURL;
+                }
+                streamInfo.classList.remove("hidden");
                 
                 screenStream.getVideoTracks()[0].addEventListener('ended', () => {
                     stopStream();
@@ -2002,6 +2134,89 @@
                         <div style="font-size: 0.8rem; color: rgba(255,255,255,0.6);">${(file.size / 1024).toFixed(2)} KB</div>
                     </div>
                 `;
+            }
+        }
+
+        // تغيير الصورة الشخصية
+        function changeAvatar() {
+            if (!currentUser) return;
+            
+            avatarInput.value = '';
+            avatarPreviewImg.src = currentUser.photoURL || '';
+            openModal(avatarModal);
+        }
+
+        // حفظ الصورة الشخصية الجديدة
+        function saveAvatar() {
+            if (!avatarInput.files[0] || !currentUser) return;
+            
+            const file = avatarInput.files[0];
+            const storageRef = storage.ref(`avatars/${currentUser.uid}/${file.name}`);
+            const uploadTask = storageRef.put(file);
+            
+            uploadTask.on('state_changed', 
+                (snapshot) => {
+                    // تتبع التقدم
+                    const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+                    console.log('Upload is ' + progress + '% done');
+                }, 
+                (error) => {
+                    console.error("Upload error:", error);
+                    alert("حدث خطأ أثناء رفع الصورة");
+                }, 
+                () => {
+                    uploadTask.snapshot.ref.getDownloadURL().then((downloadURL) => {
+                        currentUser.updateProfile({
+                            photoURL: downloadURL
+                        }).then(() => {
+                            // تحديث الصورة في الواجهة
+                            userAvatar.innerHTML = `<img src="${downloadURL}" alt="صورة المستخدم">`;
+                            userAvatar.style.backgroundColor = 'transparent';
+                            
+                            // تحديث الصورة في قاعدة البيانات
+                            database.ref(`users/${currentUser.uid}/photoURL`).set(downloadURL);
+                            
+                            closeModal(avatarModal);
+                            alert("تم تحديث الصورة الشخصية بنجاح");
+                        }).catch(error => {
+                            console.error("Error updating profile:", error);
+                        });
+                    });
+                }
+            );
+        }
+
+        // تغيير اسم المستخدم
+        function changeUsername() {
+            if (!currentUser) return;
+            
+            const newUsername = prompt("أدخل اسم المستخدم الجديد:", currentUser.displayName || currentUser.email.split("@")[0]);
+            if (newUsername && newUsername.trim() !== '') {
+                currentUser.updateProfile({
+                    displayName: newUsername.trim()
+                }).then(() => {
+                    // تحديث الاسم في قاعدة البيانات
+                    database.ref(`users/${currentUser.uid}/displayName`).set(newUsername.trim());
+                    alert("تم تحديث اسم المستخدم بنجاح");
+                }).catch(error => {
+                    console.error("Error updating username:", error);
+                    alert("حدث خطأ أثناء تحديث اسم المستخدم");
+                });
+            }
+        }
+
+        // تغيير كلمة المرور
+        function changePassword() {
+            if (!currentUser) return;
+            
+            const newPassword = prompt("أدخل كلمة المرور الجديدة:");
+            if (newPassword && newPassword.trim() !== '') {
+                currentUser.updatePassword(newPassword.trim()).then(() => {
+                    alert("تم تحديث كلمة المرور بنجاح");
+                }).catch(error => {
+                    console.error("Error updating password:", error);
+                    alert("حدث خطأ أثناء تحديث كلمة المرور: " + error.message);
+                });
             }
         }
 
@@ -2326,6 +2541,34 @@
 
         sendAudioBtn.addEventListener("click", sendAudioRecording);
         cancelAudioBtn.addEventListener("click", () => closeModal(audioModal));
+
+        // تغيير الصورة الشخصية
+        changeAvatarBtn.addEventListener("click", changeAvatar);
+        avatarInput.addEventListener("change", function() {
+            if (this.files.length > 0) {
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    avatarPreviewImg.src = e.target.result;
+                };
+                reader.readAsDataURL(this.files[0]);
+            }
+        });
+        saveAvatarBtn.addEventListener("click", saveAvatar);
+        cancelAvatarBtn.addEventListener("click", () => closeModal(avatarModal));
+
+        // تغيير اسم المستخدم
+        changeUsernameBtn.addEventListener("click", changeUsername);
+
+        // تغيير كلمة المرور
+        changePasswordBtn.addEventListener("click", changePassword);
+
+        // حفظ إعدادات المستخدم
+        messageNotifications.addEventListener("change", saveUserSettings);
+        streamNotifications.addEventListener("change", saveUserSettings);
+        tournamentNotifications.addEventListener("change", saveUserSettings);
+        privateAccount.addEventListener("change", saveUserSettings);
+        hideOnlineStatus.addEventListener("change", saveUserSettings);
+        blockDMs.addEventListener("change", saveUserSettings);
 
         // تحميل القناة العامة عند البدء
         window.addEventListener("load", () => {
